@@ -1,0 +1,12 @@
+{
+  "name": "prism-dao-ui",
+  "version": "1.0.0",
+  "description": "Frontend demo for Prism DAO - Anonymous Voting System",
+  "scripts": {
+    "dev": "npx serve -p 3000",
+    "build": "echo 'No build step needed for vanilla JS demo'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
