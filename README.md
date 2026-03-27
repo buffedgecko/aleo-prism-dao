@@ -4,81 +4,118 @@
 
 [![Aleo Buildathon](https://img.shields.io/badge/Aleo-Buildathon%204-00D9FF)](https://www.aleo.org/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+[![Demo](https://img.shields.io/badge/Demo-Live%20%F0%9F%94%97-ff6b6b)](https://aleo-prism-dao.vercel.app)
 
 ## 🎯 Overview
 
-**Prism DAO** demonstrates the full power of Aleo's privacy capabilities in a real-world governance use case:
+**Prism DAO** demonstrates the full power of Aleo's privacy capabilities through a complete anonymous voting system. Unlike traditional DAOs where every vote is public, Prism DAO uses ZK proofs to keep everything private while maintaining verifiability.
 
-- **Voter Privacy**: Voter identity and balance are verified via ZK proofs without exposing addresses
-- **Vote Privacy**: Individual vote choices are stored as encrypted records, not public state
-- **Tally Privacy**: Vote counts are aggregated via ZK verification without revealing individual votes
-- **Verifiability**: Anyone can verify the election integrity without compromising voter privacy
+## ✨ Features
 
-## 🏆 Why Prism DAO Wins
+| Feature | Description |
+|---------|-------------|
+| **Anonymous Registration** | Voter eligibility verified via ZK proof without exposing balance |
+| **Encrypted Voting** | Vote choices encrypted on-chain, never linkable to voter |
+| **Nullifier System** | Prevents double-voting without revealing voter identity |
+| **ZK Verification** | Final tally verified without exposing individual votes |
+| **Flexible Proposals** | Support for public or private proposal details |
 
-| Criteria | Description | Score Target |
-|----------|-------------|--------------|
-| Privacy Usage | Deep Aleo record model usage — not just basic token transfers | 25/25 |
-| Technical | Clean architecture, modular Leo programs, comprehensive tests | 24/25 |
-| UX | Simple flows: connect → register → vote → verify | 23/25 |
-| Practicality | Every DAO, governance system, and election needs this | 24/25 |
-| Novelty | First 100% private on-chain voting system | 24/25 |
-| **Total** | | **120+** |
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         USER INTERFACE                          │
+│                  (Web UI at aleo-prism-dao.vercel.app)         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+          ┌───────────────────┼───────────────────┐
+          ▼                   ▼                   ▼
+    ┌──────────┐        ┌──────────┐        ┌──────────┐
+    │  VOTER   │        │  VOTING  │        │  TALLY   │
+    │  PROGRAM │        │  PROGRAM │        │  PROGRAM │
+    ├──────────┤        ├──────────┤        ├──────────┤
+    │ Register │        │ Cast Vote│        │Verify &  │
+    │ ZK Proof │        │ Encrypt  │        │ Tally    │
+    │ Balance  │        │ Nullifier│        │ Results  │
+    └──────────┘        └──────────┘        └──────────┘
+```
 
 ## 📁 Project Structure
 
 ```
 aleo-prism-dao/
 ├── programs/
-│   ├── voter.leo        # Voter registration & token balance verification
-│   ├── voting.leo       # Vote casting with encrypted records
-│   └── tally.leo        # ZK-verified vote aggregation
-├── ui/                  # Frontend demo application
+│   ├── voter.leo           # Voter registration + ZK balance proof
+│   ├── voting.leo          # Encrypted vote casting + nullifier
+│   ├── tally.leo           # ZK-verified vote aggregation
+│   └── tests/              # Unit tests for each program
+├── ui/
+│   ├── index.html          # Interactive demo (wallet simulation)
+│   └── package.json        # Dependencies
 ├── docs/
-│   ├── PRIVACY.md       # Threat model & privacy analysis
-│   └── ARCHITECTURE.md  # System design
-└── tests/               # Integration tests
+│   ├── PRIVACY.md          # Threat model & privacy analysis
+│   └── ARCHITECTURE.md     # System design documentation
+├── DEMO_SCRIPT.md          # Video demo script
+├── DEMO_RECORDING.md       # Complete recording guide
+└── SUBMISSION.md           # Buildathon submission template
 ```
+
+## 🔒 Privacy Model
+
+| Data | Visibility | Protection |
+|------|------------|------------|
+| Voter Address | **Hidden** | Not stored in vote records |
+| Vote Choice | **Hidden** | Encrypted in Vote record |
+| Voting Weight | **Hidden** | ZK proof without exposure |
+| Proposal Details | **Public** | Transparency for governance |
+| Final Tally | **Public** | Verified via ZK proof |
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- [Leo CLI](https://github.com/AleoHQ/leo) v1.0.0+
-- [Aleo Studio](https://www.aleo.org/studio) (optional)
-- Node.js 18+ (for UI)
-
-### Build Programs
-
-```bash
-# Build all Leo programs
-leo build --all
-
-# Run tests
-leo test --all
-```
-
-### Run UI Demo
+### Run Demo Locally
 
 ```bash
 cd ui
 npm install
 npm run dev
+# Open http://localhost:3000
 ```
 
-## 🔒 Privacy Model
+### View Live Demo
 
-See [PRIVACY.md](docs/PRIVACY.md) for detailed threat model.
+👉 **https://aleo-prism-dao.vercel.app**
 
-## 📖 Documentation
+## 📹 Demo Video
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Privacy Analysis](docs/PRIVACY.md)
+Recording guide available in [DEMO_RECORDING.md](DEMO_RECORDING.md)
 
-## 👥 Team
+## 🧪 Testing
 
-Built for Aleo Privacy Buildathon Wave 4.
+```bash
+# Test voter program
+leo test programs/tests/voter_test.leo
 
-## 📄 License
+# Test voting program  
+leo test programs/tests/voting_test.leo
 
-GPL v3 — see [LICENSE](LICENSE)
+# Test tally program
+leo test programs/tests/tally_test.leo
+```
+
+## 📄 Documentation
+
+- [Privacy Analysis](docs/PRIVACY.md) — What data is protected and how
+- [Architecture](docs/ARCHITECTURE.md) — System design and data flow
+- [Demo Script](DEMO_SCRIPT.md) — Word-for-word demo narration
+
+## 🏆 Buildathon Submission
+
+See [SUBMISSION.md](SUBMISSION.md) for submission details.
+
+## 📜 License
+
+GNU General Public License v3.0 — see [LICENSE](LICENSE)
+
+---
+
+Built with 🔐 for the [Aleo Privacy Buildathon Wave 4](https://www.aleo.org/buildathon)
