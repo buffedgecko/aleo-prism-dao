@@ -1,0 +1,23 @@
+# Build outputs
+*.out
+*.in
+*.prover.*
+*.verifier.*
+
+# Leo build
+build/
+.pest/
+target/
+
+# Node
+node_modules/
+.env
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# UI
+dist/
+.next/
